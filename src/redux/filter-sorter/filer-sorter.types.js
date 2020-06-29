@@ -1,0 +1,8 @@
+
+const FilterSorterActionTypes = {
+    TOGGLE_FILTER_SORTER_HIDDEN: 'TOGGLE_FILTER_SORTER_HIDDEN',
+    CHANGE_FILTER_SORTER: 'CHANGE_FILTER_SORTER',
+    CLEAR_FILTER_SORTER: 'CLEAR_FILTER_SORTER',
+};
+
+export default FilterSorterActionTypes;

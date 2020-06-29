@@ -1,0 +1,22 @@
+.card-photo {
+}
+.cart-photo {
+    &__box {
+    }
+}
+.collection-overview {
+    .collection {
+        &__list {
+            display: flex;
+            flex-wrap: wrap;
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+    }
+}
+.collection {
+    &__title {
+    }
+}
+.price {
+}

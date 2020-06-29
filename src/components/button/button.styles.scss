@@ -1,0 +1,30 @@
+.btn{
+    background-color: #292928;
+    color: #fff;
+    padding: 8px 16px;
+    transition: all .3s;
+    cursor: pointer;
+    text-decoration: none;
+
+    &--header{
+        padding: 12px 24px;
+        font-size: 1.125rem;
+        text-align: center;
+        background-color: #eee;
+        color: #000;
+    }
+
+    &--hover:hover{
+        background-color: #52bc00;
+    }
+}
+
+.btn-group-vertical{
+    display: inline-block;
+    &>.btn{
+        display: block;
+        &:not(:last-child){
+            margin-bottom: 20px;
+        }
+    }
+}
