@@ -5,7 +5,6 @@ import CartItem from '../cart-item/cart-item.component'
 import { connect } from 'react-redux'
 
 const CartDropdown = ({ cartItems, cartTotal }) => {
-
     return (
         <div className={`cart-dropdown`}>
             <div style={{ height: 1000 }}>

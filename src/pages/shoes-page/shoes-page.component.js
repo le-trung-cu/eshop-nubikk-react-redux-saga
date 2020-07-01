@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import CollectionOverview from '../../components/collection-overview/collection-overview.component'
 import FilterSorterIcon from '../../components/fiter-sorter-icon/filter-sorter-icon.component'
+import { fetchMenProduct } from '../../services/product.sevices'
 
 const collections = {
     title: "sneakers for men",
@@ -85,12 +86,19 @@ const collections = {
 }
 
 const ShoesPage = () => {
+    const [items, setItems] = useState(collections.items)
+
+    useEffect(() => {
+        fetchMenProduct().then(data => {
+            setItems(data)
+        })
+    }, []);
 
     return (
         <section className="shoes-page">
             <FilterSorterIcon />
             <CollectionOverview
-                title={collections.title} items={collections.items}
+                title="collections.title" items={items}
             />
         </section>
     )

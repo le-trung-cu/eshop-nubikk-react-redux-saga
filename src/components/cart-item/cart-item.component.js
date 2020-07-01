@@ -2,8 +2,46 @@ import React from 'react'
 import './cart-item.component.scss'
 import { addItem, removeItem, clearCart, clearItemFromCart } from '../../redux/cart/cart.actions'
 import { connect } from 'react-redux'
+import { clearBasketItemService, setQuantityToBasketItemService } from '../../services/basket.services'
 
 const CartItem = ({ item, addItem, removeItem, clearItemFromCart }) => {
+
+    const clearBasketItem = (item) => {
+        clearBasketItemService({ basketItemId: item.id }).then(
+            res => {
+                if (res.ok) {
+                    clearItemFromCart(item)
+                }
+            }
+        )
+    }
+
+    const addBasketItem = (item) => {
+        if (window.timeOutIdAddBasketItem)
+            clearTimeout(window.timeOutIdAddBasketItem);
+
+        addItem(item);
+        window.timeOutIdAddBasketItem = setTimeout(() => {
+            setQuantityToBasketItemService({
+                basketItemId: item.id,
+                quantity: item.quantity + 1,
+            })
+        }, 2000)
+    }
+
+    const removeBasketItem = (item) => {
+        if (window.timeOutIdRemoveBasketItem)
+            clearTimeout(window.timeOutIdRemoveBasketItem);
+
+        removeItem(item);
+        window.timeOutIdRemoveBasketItem = setTimeout(() => {
+            setQuantityToBasketItemService({
+                basketItemId: item.id,
+                quantity: item.quantity - 1,
+            })
+        }, 2000)
+    }
+
     const { picture, quantity, price, size, color, name } = item
     return (
         <div className="cart-item">
@@ -13,21 +51,21 @@ const CartItem = ({ item, addItem, removeItem, clearItemFromCart }) => {
             <div className="cart-item__detail">
                 <span className="cart-item__name">{name}</span>
                 <span className="cart-item__cofiguration">
-                    <i>color: </i><span className="cart-item__color">{color} red</span>
+                    <i>color: </i><span className="cart-item__color">{color}</span>
                     <i> size: </i><span className="cart-item__size">{size}</span>
                 </span>
                 <div className="cart-item__end">
                     <span className="cart-item__quantity">{quantity}X |</span>
                     <span className="cart-item__delete"
-                        onClick={() => clearItemFromCart(item)}>delete
+                        onClick={() => clearBasketItem(item)}>delete
                     </span>
                     <span className="cart-item__price">€ {price}</span>
                 </div>
                 <div className="cart-item__end">
                     <span className="cart-item__add-remove"
-                        onClick={() => removeItem(item)}>-</span>
+                        onClick={() => removeBasketItem(item)}>-</span>
                     <span className="cart-item__add-remove"
-                        onClick={() => addItem(item)}>+</span>
+                        onClick={() => addBasketItem(item)}>+</span>
                     <span className="cart-item__total-price">€ {quantity * price}</span>
                 </div>
             </div>

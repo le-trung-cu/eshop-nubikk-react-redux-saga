@@ -3,7 +3,8 @@ import './collection-item.styles.scss'
 import CollectionSize from '../collection-size/collection-size.component';
 
 const CollectionItem = ({ item }) => {
-    const { picture, price, imgHoverUrl, label, name, sizes } = item
+    const { picture, price, label, name, sizes } = item
+
     return (
         <div className="collection wrap">
             <div className="collection__box">

@@ -14,7 +14,9 @@ import { selectFilterSorterHidden } from './redux/filter-sorter/filter-sorter.se
 import CartFilterSortAside from './components/cart-filer-sorter-aside/cart-filter-sort-aside.component';
 
 
+
 function App({ directoryHidden, toggleMenuHidden, cartHidden, filterSorterHidden }) {
+
   return (
     <div className="App">
       <div className="wrap">
