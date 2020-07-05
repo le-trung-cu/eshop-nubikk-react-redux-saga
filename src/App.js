@@ -15,12 +15,12 @@ import CartFilterSortAside from './components/cart-filer-sorter-aside/cart-filte
 
 
 
-function App({ directoryHidden, toggleMenuHidden, cartHidden, filterSorterHidden }) {
+function App({ directoryHidden, toggleMenuHidden, }) {
 
   return (
     <div className="App">
       <div className="wrap">
-        <MenuAside hidden={directoryHidden} rightAsideHidden={cartHidden && filterSorterHidden} />
+        <MenuAside hidden={directoryHidden} />
         <div className="container">
           <Header toggleMenuHidden={toggleMenuHidden} />
           <main className="main">
@@ -39,9 +39,7 @@ function App({ directoryHidden, toggleMenuHidden, cartHidden, filterSorterHidden
 }
 
 const mapStateToProps = (state) => ({
-  directoryHidden: state.directory.hidden,
-  cartHidden: selectCartHidden(state),
-  filterSorterHidden: selectFilterSorterHidden(state)
+  directoryHidden: state.directory.hidden
 })
 
 const mapDispatchToProps = (dispatch) => ({

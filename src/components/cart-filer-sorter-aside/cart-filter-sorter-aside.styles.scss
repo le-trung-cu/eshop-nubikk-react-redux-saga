@@ -11,3 +11,11 @@
         width: 400px;
     }
 }
+
+@media screen and (max-width: 400px) {
+    .cart-filter-sort-aside {
+        &__content {
+            width: 100%;
+        }
+    }
+}

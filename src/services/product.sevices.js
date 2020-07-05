@@ -5,8 +5,9 @@ const headers = {
 };
 
 
-export const fetchMenProduct = () => {
-    const url = `https://localhost:5001/api/men/products`;
+export const fetchMenProduct = (search = '') => {
+    let url = `https://localhost:5001/api/men/products${search}`;
+    console.log(url)
     return fetch(url, {
         method: 'GET',
         headers
@@ -17,3 +18,4 @@ export const fetchMenProduct = () => {
         return data;
     })
 };
+

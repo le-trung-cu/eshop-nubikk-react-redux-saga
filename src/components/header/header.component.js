@@ -12,27 +12,19 @@ const Header = ({ toggleMenuHidden, cartHidden }) => {
 
     return (
         <header className="header">
+            <h1 className="logo--m">NuBikk</h1>
             <nav className="nav">
                 <ul className="nav__list">
                     <li className="nav__item">
                         <span onClick={() => toggleMenuHidden()}>
                             <FaBars />
-                            <span className="nav__text">
-                                Menu
-                            </span>
                         </span>
-                    </li>
-                    <li className="nav__item">
-                        <NavLink to='/' className="nav__text">Sale</NavLink>
                     </li>
                     <li className="nav__item">
                         <NavLink to='/' className="nav__text">Men</NavLink>
                     </li>
                     <li className="nav__item">
                         <NavLink to='/' className="nav__text">Women</NavLink>
-                    </li>
-                    <li className="nav__item">
-                        <NavLink to='/' className="nav__text">Accessories</NavLink>
                     </li>
                     <li className="nav__item">
                         <NavLink to='/' className="nav__text">Clothing</NavLink>
@@ -45,7 +37,7 @@ const Header = ({ toggleMenuHidden, cartHidden }) => {
                         <span className="search-text">Search</span>
                         <FaSearch />
                     </li>
-                    <li className="nav__item">
+                    <li className="nav__item faglobe">
                         <FaGlobe />
                     </li>
                     <li className="nav__item">

@@ -3,8 +3,13 @@ import './menu-aside.styles.scss';
 import { BsX } from 'react-icons/bs'
 import { toggleDirectoryHidden } from '../../redux/directory/directory.actions';
 import { connect } from 'react-redux';
+import { selectCartHidden } from '../../redux/cart/cart.selectors';
+import { selectFilterSorterHidden } from '../../redux/filter-sorter/filter-sorter.selector';
 
-const MenuAside = ({ hidden, rightAsideHidden, toggleDirectoryHidden }) => {
+const MenuAside = ({ hidden, toggleDirectoryHidden, cartHidden, filterSorterHidden }) => {
+
+    const rightAsideHidden = cartHidden && filterSorterHidden
+
     const classes = !hidden ? "show--menu-aside "
         : !rightAsideHidden ? "show--right-aside "
             : ""
@@ -35,9 +40,13 @@ const MenuAside = ({ hidden, rightAsideHidden, toggleDirectoryHidden }) => {
         </aside>
     )
 }
+const mapStateToProps = (state) => ({
+    cartHidden: selectCartHidden(state),
+    filterSorterHidden: selectFilterSorterHidden(state)
+})
 
 const mapDispatchToProps = dispatch => ({
     toggleDirectoryHidden: () => dispatch(toggleDirectoryHidden())
 })
 
-export default connect(null, mapDispatchToProps)(MenuAside)
+export default connect(mapStateToProps, mapDispatchToProps)(MenuAside)

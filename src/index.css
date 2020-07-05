@@ -48,3 +48,9 @@ img {
   font-size: 25px;
   color: #000000c7;
 }
+
+@media screen and (max-width: 400px) {
+  html {
+    font-size: 80%;
+  }
+}

@@ -27,3 +27,11 @@
 .menu__group {
   height: 1000px;
 }
+
+@media screen and (max-width: 400px) {
+  .menu-aside {
+    &.show--right-aside {
+      margin-left: calc(-100% - 250px);
+    }
+  }
+}

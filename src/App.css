@@ -1,12 +1,11 @@
-
 .wrap {
   display: flex;
   overflow: hidden;
 }
-.main{
+.main {
   margin-top: 50px;
 }
-.container{
+.container {
   width: 100%;
   flex-shrink: 0;
 }

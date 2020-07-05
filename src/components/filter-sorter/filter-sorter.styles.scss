@@ -1,0 +1,17 @@
+.filter-sorter {
+    input {
+        margin-right: 10px;
+    }
+    .clear {
+        width: 100%;
+        text-align: center;
+        background-color: #ececec;
+        margin-top: 10px;
+        input {
+            display: none;
+        }
+    }
+    .input-range {
+        width: 100%;
+    }
+}

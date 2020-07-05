@@ -41,3 +41,24 @@
         color: #000000c7;
     }
 }
+
+@media screen and (max-width: 588px) {
+    .search {
+        display: flex;
+        align-items: center;
+        &.hidden {
+        }
+
+        &__form {
+        }
+        &__input,
+        &__input:focus {
+        }
+        &__input:focus {
+        }
+        .close-icon {
+            display: flex;
+            position: static;
+        }
+    }
+}

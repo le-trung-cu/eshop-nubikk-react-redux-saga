@@ -2,7 +2,7 @@ import FilterSorterActionTypes from './filer-sorter.types';
 
 const INITIAL_STATE = {
     hidden: true,
-    fiterSorterParams: {}
+    params: { categories: [], models: [], priceRange: [], colorIds: [], size: '' }
 };
 
 const filterSorterReducer = (state = INITIAL_STATE, action) => {
@@ -15,12 +15,12 @@ const filterSorterReducer = (state = INITIAL_STATE, action) => {
         case FilterSorterActionTypes.CLEAR_FILTER_SORTER:
             return {
                 ...state,
-                fiterSorterParams: {}
+                params: {}
             };
         case FilterSorterActionTypes.CHANGE_FILTER_SORTER:
             return {
                 ...state,
-                fiterSorterParams: action.payload
+                params: action.payload
             };
         default:
             return state;

@@ -6,10 +6,10 @@ const CollectionItem = ({ item }) => {
     const { picture, price, label, name, sizes } = item
 
     return (
-        <div className="collection wrap">
+        <div className="collection collection__wrap">
             <div className="collection__box">
                 <div className="card">
-                    <div className="cart__photo-box">
+                    <div className="card__photo-box">
                         <img src={picture} alt="" />
                         {label ? <div className="label">{label}</div> : null}
                     </div>
