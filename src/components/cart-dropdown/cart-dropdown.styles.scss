@@ -25,3 +25,12 @@
     align-items: center;
     cursor: pointer;
 }
+
+.cart-empty-message {
+    padding: 30px;
+    display: block;
+    height: unset;
+    font-weight: 500;
+    background-color: #ffffff;
+    color: #636161;
+}

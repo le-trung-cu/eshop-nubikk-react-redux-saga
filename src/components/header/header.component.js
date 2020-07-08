@@ -6,6 +6,7 @@ import { FaSearch, FaGlobe } from 'react-icons/fa'
 
 import './header.styles.scss'
 import CartIcon from '../cart-icon/cart-icon.component';
+import User from '../user/user.component';
 
 const Header = ({ toggleMenuHidden, cartHidden }) => {
     const [searchHidden, setSearchHidden] = useState(true)
@@ -38,7 +39,7 @@ const Header = ({ toggleMenuHidden, cartHidden }) => {
                         <FaSearch />
                     </li>
                     <li className="nav__item faglobe">
-                        <FaGlobe />
+                        <User />
                     </li>
                     <li className="nav__item">
                         <CartIcon />

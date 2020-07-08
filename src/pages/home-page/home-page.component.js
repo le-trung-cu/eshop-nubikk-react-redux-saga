@@ -7,8 +7,8 @@ const HomePage = () => {
         <div className="home-page">
             <HeaderImage imgUrl="./img/shop-01_1920x1920.jpg" height="80vh">
                 <div className="btn-group-vertical">
-                    <Link className="btn btn--header" to="/men-home">SHOP MEN</Link>
-                    <Link className="btn btn--header" to="/women-home">SHOP WOMEN</Link>
+                    <Link className="btn btn--header text-black" to="/men-home">SHOP MEN</Link>
+                    <Link className="btn btn--header text-black" to="/men-home">SHOP WOMEN</Link>
                 </div>
             </HeaderImage>
         </div>

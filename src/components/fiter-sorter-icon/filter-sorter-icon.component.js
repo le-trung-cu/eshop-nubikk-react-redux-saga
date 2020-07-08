@@ -8,10 +8,12 @@ import './filter-sorter-icon.styles.scss'
 
 const FilterSorterIcon = ({ toggleHidden }) => {
     return (
-        <span className="filter-sorter-icon" onClick={toggleHidden}>
-            <FaSlidersH />
-            <span>Filter & Sortering</span>
-        </span>
+        <div style={{ textAlign: 'right' }}>
+            <span className="filter-sorter-icon" onClick={toggleHidden}>
+                <FaSlidersH />
+                <span>Filter & Sortering</span>
+            </span>
+        </div>
     )
 }
 

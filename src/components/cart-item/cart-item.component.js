@@ -1,19 +1,18 @@
 import React from 'react'
 import './cart-item.component.scss'
-import { addItem, removeItem, clearCart, clearItemFromCart } from '../../redux/cart/cart.actions'
+import { addItem, removeItem, clearItemFromCart } from '../../redux/cart/cart.actions'
 import { connect } from 'react-redux'
 import { clearBasketItemService, setQuantityToBasketItemService } from '../../services/basket.services'
+import { toast } from 'react-toastify'
 
 const CartItem = ({ item, addItem, removeItem, clearItemFromCart }) => {
 
     const clearBasketItem = (item) => {
-        clearBasketItemService({ basketItemId: item.id }).then(
-            res => {
-                if (res.ok) {
-                    clearItemFromCart(item)
-                }
+        clearBasketItemService({ basketItemId: item.id }).then(res => {
+            if (res.ok) {
+                clearItemFromCart(item);
             }
-        )
+        });
     }
 
     const addBasketItem = (item) => {
@@ -25,8 +24,14 @@ const CartItem = ({ item, addItem, removeItem, clearItemFromCart }) => {
             setQuantityToBasketItemService({
                 basketItemId: item.id,
                 quantity: item.quantity + 1,
+            }).then(res => {
+                if (res.ok) {
+                    toast.success('cart item updated')
+                }
+            }).catch(error => {
+                toast.error(`error update cart item`)
             })
-        }, 2000)
+        }, 700)
     }
 
     const removeBasketItem = (item) => {
@@ -38,8 +43,15 @@ const CartItem = ({ item, addItem, removeItem, clearItemFromCart }) => {
             setQuantityToBasketItemService({
                 basketItemId: item.id,
                 quantity: item.quantity - 1,
-            })
-        }, 2000)
+            }).then(res => {
+                console.log(res)
+                if (res.ok) {
+                    toast.success('cart item updated')
+                }
+            }).catch(error => {
+                toast.error(`error update cart item`)
+            });
+        }, 700);
     }
 
     const { picture, quantity, price, size, color, name } = item

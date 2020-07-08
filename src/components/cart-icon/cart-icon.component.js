@@ -1,23 +1,36 @@
 import React from 'react'
 import { BsBag } from 'react-icons/bs'
-import { selectCartItemsCount } from '../../redux/cart/cart.selectors'
-import { toggleCartHidden, addItem } from '../../redux/cart/cart.actions'
+import { selectCartItemsCount, selectCartItems } from '../../redux/cart/cart.selectors'
+import { toggleCartHidden, addItem, clearCart } from '../../redux/cart/cart.actions'
 import { useEffect } from 'react'
 import { connect } from 'react-redux'
 
 import './cart-icon.styles.scss'
-import { fetchBasketService } from '../../services/basket.services'
+import { fetchBasketService, createBasket } from '../../services/basket.services'
 
-const CartIcon = ({ itemCount, toggleCartHidden, addItem }) => {
+const CartIcon = ({ user, itemCount, toggleCartHidden, addItem, clearCart, items }) => {
 
     useEffect(() => {
-        fetchBasketService().then(({ items }) => {
-            console.log(items)
-            items.forEach(item => {
-                addItem(item)
-            })
-        })
-    }, [])
+        console.log('CartIcon', user)
+        if (user) {
+            if (itemCount > 0) {
+                console.log('xxxxxxxxxxxxxx')
+                createBasket(items).then(({ items }) => {
+                    clearCart();
+                    items.forEach(item => addItem(item))
+                }).catch(error => console.log('error ', error));
+            } else {
+                console.log('yyyyyyyyyyyy')
+
+                fetchBasketService().then(({ items }) => {
+                    console.log(items)
+                    items.forEach(item => {
+                        addItem(item)
+                    })
+                }).catch(error => console.log('error ', error))
+            }
+        }
+    }, [user]);
 
     return (
         <span className="cart-icon" onClick={toggleCartHidden}>
@@ -28,12 +41,15 @@ const CartIcon = ({ itemCount, toggleCartHidden, addItem }) => {
 }
 
 const mapStateToProps = state => ({
-    itemCount: selectCartItemsCount(state)
+    itemCount: selectCartItemsCount(state),
+    items: selectCartItems(state),
+    user: state.user.user
 })
 
 
 const mapDispatchToProps = dispath => ({
     toggleCartHidden: () => dispath(toggleCartHidden()),
-    addItem: (item) => dispath(addItem(item))
+    addItem: (item) => dispath(addItem(item)),
+    clearCart: () => dispath(clearCart())
 })
 export default connect(mapStateToProps, mapDispatchToProps)(CartIcon)

@@ -49,6 +49,22 @@ img {
   color: #000000c7;
 }
 
+hr {
+  border: none;
+}
+
+label:hover {
+  cursor: pointer;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-black {
+  color: #0f0f0f !important;
+}
+
 @media screen and (max-width: 400px) {
   html {
     font-size: 80%;

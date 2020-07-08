@@ -58,14 +58,22 @@ const filtersInit = [
         name: 'size',
         title: 'size',
         type: 'radio',
-        values: [{ name: '40', value: 40 }, { name: '41', value: 41 }, { name: '42', value: '42' }, { name: 'clear', value: undefined }],
+        values: [{ name: '40', value: 40 },
+        { name: '41', value: 41 },
+        { name: '42', value: 42 },
+        { name: '43', value: 43 },
+        { name: '44', value: 44 },
+        { name: '45', value: 45 },
+        { name: '46', value: 46 },
+        { name: '47', value: 47 },
+        { name: 'clear', value: undefined }],
         explain: false
     },
     {
         name: 'priceRange',
         title: 'price range',
         type: 'range',
-        maxValue: 100,
+        maxValue: 250,
         minValue: 0,
         explain: false
     }
@@ -73,7 +81,7 @@ const filtersInit = [
 
 const filtersInitTypeMap = filtersInit.reduce((value, current) => { value[current.name] = current.type; return value }, {})
 
-const FilterSorter = ({ filterSorterParams, changeFilterSorter, setCollectionItems }) => {
+const FilterSorter = ({ countCollectionItems, filterSorterParams, changeFilterSorter, setCollectionItems }) => {
 
     const [filters, setFilters] = useState(filtersInit)
 
@@ -112,7 +120,7 @@ const FilterSorter = ({ filterSorterParams, changeFilterSorter, setCollectionIte
         for (let filterItemName in filterSorterParams) {
             switch (filtersInitTypeMap[filterItemName]) {
                 case 'range':
-                    filterSorterParams[filterItemName] = filterSorterParams[filterItemName]?.split(':').map(s => s.trim());
+                    filterSorterParams[filterItemName] = filterSorterParams[filterItemName]?.split(':').map(s => parseInt(s.trim()));
                     break;
                 case 'checkbox':
                     filterSorterParams[filterItemName] = filterSorterParams[filterItemName]?.split(',').map(s => s.trim())
@@ -180,13 +188,13 @@ const FilterSorter = ({ filterSorterParams, changeFilterSorter, setCollectionIte
             })
             setFilters(s)
         }
-        console.log(pra)
         const search = getSearchString(pra)
 
         history.replace(history.location.pathname + search)
 
         window.timeOutIdFilterSorter = setTimeout(() => {
             fetchMenProduct(search).then(data => {
+                console.log(data)
                 setCollectionItems(data)
             })
         }, 300);
@@ -231,13 +239,15 @@ const FilterSorter = ({ filterSorterParams, changeFilterSorter, setCollectionIte
                         </FilterSortItemCollapse>
                     ))
                 }
+                <div className="btn count-collection-Item">{countCollectionItems} Products</div>
             </form>
         </div >
     )
 }
 
 const mapStateToProps = state => ({
-    filterSorterParams: state.filterSorter.params
+    filterSorterParams: state.filterSorter.params,
+    countCollectionItems: state.shopCollection.collectionItems.length
 })
 
 const mapDispatchToProps = dispatch => ({

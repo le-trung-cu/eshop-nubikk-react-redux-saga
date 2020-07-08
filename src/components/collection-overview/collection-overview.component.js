@@ -6,7 +6,7 @@ import './collection-overview.styles.scss'
 const CollectionOverview = ({ title, items }) => {
     return (
         <section className="collection-overview">
-            <h3 className="collection__title">{title}</h3>
+            {/* <h3 className="collection__title">{title}</h3> */}
             <div className="collection__list">
                 {
                     items.map(item =>

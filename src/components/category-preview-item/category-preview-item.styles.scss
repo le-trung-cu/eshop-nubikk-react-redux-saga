@@ -1,6 +1,12 @@
 .category-item {
     align-items: center;
     width: 25%;
+    &__rotation {
+        padding-top: calc(100% * 475 / 298);
+        figure {
+            margin-top: calc(-100% * 475 / 298);
+        }
+    }
     .photo {
         width: 100%;
         padding: 7px;

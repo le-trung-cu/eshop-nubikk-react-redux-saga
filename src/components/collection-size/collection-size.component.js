@@ -5,22 +5,27 @@ import './collection-size.styles.scss'
 
 import { addItem } from '../../redux/cart/cart.actions'
 import { addItemToBasketService } from '../../services/basket.services'
+import userServices from '../../services/user.services'
 
 const CollectionSize = ({ sizeObj, item, addItem }) => {
+
     const sizes = Object.keys(sizeObj).map(size => ({
         size,
         status: sizeObj[size]
     }))
 
     const addToCart = (size) => {
-        addItemToBasketService({
-            productId: item.id,
-            color: item.color,
-            size: size,
-        }).then(data => {
-            console.log(data)
-            addItem(data)
-        })
+        if (userServices.user) {
+            addItemToBasketService({
+                productId: item.id,
+                color: item.colorName,
+                size
+            }).then(data => {
+                addItem(data)
+            })
+        } else {
+            addItem({ ...item, size, id: `${item.id}_size_${size}`, productId: item.id, color: item.colorName })
+        }
     }
 
     return (

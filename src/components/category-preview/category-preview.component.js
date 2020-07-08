@@ -14,7 +14,7 @@ const CategoryPreview = ({ title, items = [] }) => {
             <div className="contain">
                 <h3 className="category-preview__title">{title}</h3>
                 <Flicking ref={flicking} className="flicking flicking1" bound={false}
-                    hanger={"0"} anchor={"0"}>
+                    hanger={"0"} anchor={"0"} autoResize={true} >
                     {
                         items.map((item, index) =>
                             <CategoryPreviewItem

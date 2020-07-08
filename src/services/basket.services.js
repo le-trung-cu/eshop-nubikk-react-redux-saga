@@ -1,59 +1,94 @@
-const headers = {
+import userServices from "./user.services";
+import { toast } from "react-toastify";
+const www = 'https://localhost:5001';
+const getHeaders = () => ({
     'Accept': 'application/json',
     'Content-Type': 'application/json',
-    'Authorization': 'Basic dHJ1bmdjdUBnbWFpbC5jb206MTIzNA=='
-};
-const uid = '8f8ec408-6bd7-48a1-826c-a373f479c4d9';
-const basketId = 1;
+    'Authorization': userServices.authorization
+});
 
 export const addItemToBasketService = ({ productId, size, color, quantity = 1 }) => {
-    const url = `https://localhost:5001/api/buyer/${uid}/basket`;
-    // const url = 'https://localhost:5001/api/buyer/8f8ec408-6bd7-48a1-826c-a373f479c4d9/basket';
+    const url = `${www}/api/buyer/${userServices.uid}/basket`;
 
     const data = { productId, size, color, quantity }
 
     return fetch(url, {
         method: 'POST',
-        headers,
+        headers: getHeaders(),
         body: JSON.stringify(data)
-    }).then(data => { console.log(data); return data.json() });
+    }).then(data => {
+        if (data.ok) {
+            toast.success('product added to basket')
+            return data.json();
+        }
+        toast.warning(`${data.status} error! product add to basket`);
+    });
 };
 
 export const setQuantityToBasketItemService = ({ basketItemId, quantity }) => {
     const data = { basketItemId, quantity }
-    const url = `https://localhost:5001/api/buyer/${uid}/basket/`;
+    const url = `${www}/api/buyer/${userServices.uid}/basket/`;
     return fetch(url, {
         method: 'PUT',
-        headers,
+        headers: getHeaders(),
         body: JSON.stringify(data)
     })
 }
 
 export const clearBasketItemService = ({ basketItemId }) => {
-    return setQuantityToBasketItemService({ basketItemId, quantity: 0 })
+    return setQuantityToBasketItemService({ basketItemId, quantity: 0 }).then(response => {
+        if (response.ok) {
+            toast.warning('cart item deleted');
+        }
+        return response;
+    });
 }
 
 
 export const fetchCountService = () => {
-    const url = `https://localhost:5001/api/buyer/${uid}/basket`;
+    const url = `${www}/api/buyer/${userServices.uid}/basket`;
     fetch(url, {
         method: 'GET',
-        headers
+        headers: getHeaders(),
     }).then(({ data }) => data.json()).then(s => console.log(s));
 }
 
 export const fetchBasketService = () => {
-    const url = `https://localhost:5001/api/buyer/${uid}/basket`;
+    const url = `${www}/api/buyer/${userServices.uid}/basket`;
     return fetch(url, {
         method: 'GET',
-        headers
+        headers: getHeaders(),
     }).then(data => data.json());
 };
 
 export const getCountService = () => {
-    const url = `https://localhost:5001/api/buyer/${uid}/basket/count`;
+    const url = `/api/buyer/${userServices.uid}/basket/count`;
     return fetch(url, {
         method: 'GET',
-        headers
+        headers: getHeaders()
     });
 };
+
+export const createBasket = (cartItems) => {
+    const url = `${www}/api/buyer/${userServices.uid}/basket/create`;
+
+    const data = {
+        items: cartItems.map(item => ({
+            productId: item.productId,
+            size: item.size,
+            color: item.colorName,
+            quantity: item.quantity
+        }))
+    }
+
+    return fetch(url, {
+        method: 'POST',
+        headers: getHeaders(),
+        body: JSON.stringify(data)
+    }).then(data => {
+        if (data.ok) {
+            toast.success('products added to basket')
+            return data.json();
+        }
+    });
+}
